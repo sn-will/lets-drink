@@ -1,4 +1,4 @@
-class Drink {
+class DrinkModel {
   String id;
   String name;
   String category;
@@ -6,12 +6,12 @@ class Drink {
   String instructions;
   String image;
 
-  Drink.fromJson(parsedJson) {
+  DrinkModel.fromJson(parsedJson) {
     id = parsedJson['idDrink'];
     name = parsedJson['strDrink'];
-    category = parsedJson['strCategory'];
-    alcoholic = parsedJson['strAlcoholic'];
-    instructions = parsedJson['strInstructions'];
     image = parsedJson['strDrinkThumb'];
+    category = parsedJson['strCategory'] ?? '';
+    alcoholic = parsedJson['strAlcoholic'] ?? '';
+    instructions = parsedJson['strInstructions'] ?? '';
   }
 }
