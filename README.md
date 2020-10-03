@@ -1,2 +1,2 @@
 # lets-drink
-An experimental app to search for drink recipes using Flutter and Thecocktaildb API
+An experimental Flutter project to search for drink recipes using Thecocktaildb API
