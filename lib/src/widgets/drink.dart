@@ -3,10 +3,10 @@ import '../models/drink_model.dart';
 
 class Drink extends StatelessWidget {
   final DrinkModel drink;
-  final double _contentSpacing = 15.0;
-  final double _imageHeight = 120;
+  final double _contentSpacing = 12.0;
+  final double _imageHeight = 110;
   final double _boxRadius = 16.0;
-  final double _shadowSize = 8.0;
+  final double _shadowSize = 6.5;
 
   Drink({this.drink});
 
@@ -27,7 +27,7 @@ class Drink extends StatelessWidget {
       child: Column(
         children: <Widget>[
           itemImage(),
-          itemContent(),
+          Expanded(child: itemContent(), flex: 1)
         ],
       ),
     );
@@ -50,34 +50,37 @@ class Drink extends StatelessWidget {
   }
 
   Widget itemContent() {
-    final Widget drinkName = Text(
-      '${drink.name}',
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
-      style: TextStyle(
-        color: Colors.black87,
-        fontSize: 18.0,
-        fontWeight: FontWeight.w600,
-      ),
-    );
+    Widget drinkName() {
+      return Text(
+        '${drink.name}',
+        overflow: TextOverflow.ellipsis,
+        maxLines: 2,
+        style: TextStyle(
+          color: Colors.black87,
+          fontSize: 15.0,
+          fontWeight: FontWeight.w600,
+        ),
+      );
+    }
 
-    final Widget drinkBottom = Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Icon(Icons.star, color: Colors.orangeAccent, size: 28.0),
-      ],
-    );
+    Widget drinkBottom() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Icon(Icons.star, color: Colors.orangeAccent, size: 28.0),
+        ],
+      );
+    }
 
     return Container(
       padding: EdgeInsets.all(_contentSpacing),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          drinkName,
-          drinkBottom,
+          Expanded(child: drinkName(), flex: 1),
+          drinkBottom(),
         ],
       ),
-      
     );
   }
 }
