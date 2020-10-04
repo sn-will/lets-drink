@@ -6,7 +6,7 @@ class DrinkModel {
   String instructions;
   String image;
 
-  DrinkModel.fromJson(parsedJson) {
+  DrinkModel.fromJson(Map<String, dynamic> parsedJson) {
     id = parsedJson['idDrink'];
     name = parsedJson['strDrink'];
     image = parsedJson['strDrinkThumb'];

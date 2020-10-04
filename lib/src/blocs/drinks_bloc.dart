@@ -5,13 +5,11 @@ class DrinksBloc {
   final api = DrinksApiProvider();
   final _drinksController = PublishSubject<List<Map<String, dynamic>>>();
 
-  // Getter
+  // Drinks getter
   Stream get fetchDrinks => _drinksController.stream;
 
   fetchDrinksByIngredient(ingredient) async {
     final drinks = await api.fetchDrinkByIngredient(ingredient);
-
-    print(drinks);
 
     _drinksController.sink.add(drinks);
   }

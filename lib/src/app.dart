@@ -7,6 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Lets Drink!',
       home: Home(),
+      theme: ThemeData(fontFamily: 'Noto Sans'),
     );
   }
 }
