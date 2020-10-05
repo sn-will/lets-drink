@@ -12,10 +12,10 @@ class DrinksListGrid extends StatelessWidget {
     final drinkHeight = (size.height - 80) / 3;
     final drinkWidth = size.width / 2;
 
-    bloc.fetchDrinksByIngredient('Tequila');
+    bloc.fetchDrinksByIngredient('Bourbon');
 
     return StreamBuilder(
-        stream: bloc.fetchDrinks,
+        stream: bloc.drinks,
         builder: (context, AsyncSnapshot snapshot) {
           return SliverGrid(
             delegate: SliverChildBuilderDelegate(

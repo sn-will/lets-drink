@@ -1,41 +1,32 @@
 import 'package:flutter/material.dart';
-import '../blocs/drinks_bloc_provider.dart';
-import '../widgets/drinks_list_grid.dart';
+import '../widgets/ingredients_list.dart';
 
 class Home extends StatelessWidget {
+  final _contentSpacing = 18.0;
+
   @override
   Widget build(BuildContext context) {
-    return DrinksProvider(
-      child: SafeArea(
-        child: Scaffold(
-          body: CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                expandedHeight: 100.0,
-                pinned: true,
-                backgroundColor: Colors.orangeAccent,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text('Let\'s Drink!'),
-                ),
-              ),
-              SliverPadding(
-                padding: EdgeInsets.all(15.0),
-                sliver: DrinksListGrid(),
-              ),
-            ],
-          ),
-          backgroundColor: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            pageTitle(),
+            Container(
+              margin: EdgeInsets.only(left: _contentSpacing, top: _contentSpacing, bottom: _contentSpacing),
+              child: IngredientsList(),
+            ),
+            Expanded(child: Container(color: Colors.blue), flex: 2),
+            Expanded(child: Container(color: Colors.deepPurple), flex: 2),
+          ],
         ),
       ),
     );
   }
 
   Widget pageTitle() {
-    final _titleSpacing = 18.0;
-
     return Container(
       padding: EdgeInsets.only(
-          top: _titleSpacing, left: _titleSpacing, right: _titleSpacing),
+          top: _contentSpacing, left: _contentSpacing, right: _contentSpacing),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

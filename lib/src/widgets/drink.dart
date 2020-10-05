@@ -67,7 +67,7 @@ class Drink extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Icon(Icons.star, color: Colors.orangeAccent, size: 28.0),
+          Icon(Icons.star_border, color: Colors.orangeAccent, size: 28.0),
         ],
       );
     }

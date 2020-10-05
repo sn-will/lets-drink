@@ -1,7 +1,7 @@
-class Ingredient {
-  String ingredient;
+class IngredientModel {
+  String name;
 
-  Ingredient.fromJson(parsedJson) {
-    ingredient = parsedJson['strIngredient1'];
+  IngredientModel.fromJson(parsedJson) {
+    name = parsedJson['strIngredient1'];
   }
 }

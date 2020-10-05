@@ -10,11 +10,15 @@ class DrinksApiProvider {
 
   }
 
-  fetchIngridients() {
+  Future<List<Map<String, dynamic>>> fetchIngridients() async {
+    final filter = 'list.php?i=list';
+    final response = await client.get('$baseURL/$filter');
+    final ingredients = json.decode(response.body);
 
+    return ingredients['drinks'].cast<Map<String, dynamic>>();
   }
 
-  Future<List<Map<String, dynamic>>> fetchDrinkByIngredient(ingredient) async {
+  Future<List<Map<String, dynamic>>> fetchDrinksByIngredient(ingredient) async {
     final filter = 'filter.php?i=$ingredient';
     final response = await client.get('$baseURL/$filter');
     final drinks = json.decode(response.body);
