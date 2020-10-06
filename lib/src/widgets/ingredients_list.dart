@@ -47,12 +47,13 @@ class _IngredientsListState extends State<IngredientsList> {
 
   Widget ingredientTag(IngredientModel ingredient, int index) {
     var isSelected = selectedItemIndex == index;
+    var isFirst = index == 0;
 
     return GestureDetector(
       onTap: () => selectIngredient(index),
       child: Container(
         padding: EdgeInsets.only(left: _tagPadding, right: _tagPadding),
-        margin: EdgeInsets.only(right: _tagSpacing),
+        margin: EdgeInsets.only(right: _tagSpacing, left: isFirst ? (_tagSpacing * 2) : 0.0),
         child: Center(
             child: Text(
           '${ingredient.name}',

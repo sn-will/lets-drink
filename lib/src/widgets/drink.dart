@@ -3,16 +3,22 @@ import '../models/drink_model.dart';
 
 class Drink extends StatelessWidget {
   final DrinkModel drink;
+  final int index;
   final double _contentSpacing = 12.0;
   final double _imageHeight = 110;
   final double _boxRadius = 16.0;
   final double _shadowSize = 6.5;
+  final double _drinkMargin = 20.0;
 
-  Drink({this.drink});
+  Drink({@required this.drink, this.index});
 
   @override
   Widget build(BuildContext context) {
+    final isFirst = index == 0;
+
     return Container(
+      width: 180,
+      margin: EdgeInsets.only(right: _drinkMargin, left: isFirst ? _drinkMargin : 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(_boxRadius),
         color: Colors.white,

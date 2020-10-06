@@ -6,8 +6,12 @@ class DrinksApiProvider {
   static String credentials = '1';
   String baseURL = 'https://www.thecocktaildb.com/api/json/v1/$credentials';
 
-  fetchPopularDrinks() {
+  Future<List<Map<String, dynamic>>> fetchPopularDrinks() async {
+    final filter = 'popular.php';
+    final response = await client.get('$baseURL/$filter');
+    final popular = json.decode(response.body);
 
+    return popular['drinks'].cast<Map<String, dynamic>>();
   }
 
   Future<List<Map<String, dynamic>>> fetchIngridients() async {
