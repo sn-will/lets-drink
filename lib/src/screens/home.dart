@@ -10,15 +10,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = DrinksProvider.of(context);
-    bloc.fetchPopularDrinks();
-    bloc.fetchDrinksByIngredient('Tequila');
 
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: <Widget>[
-            pageTitle('Let\'s Drink!', 'Search for your favorite drinks recipes.'),
-            IngredientsList(),
+            Container(padding: EdgeInsets.only(top: 20)),
+            contentTitle('Let\'s Drink!', 'Search for your favorite drinks recipes.', 32),
             Expanded(child: popularDrinks(bloc), flex: 2),
             Expanded(child: tequilaDrinks(bloc), flex: 2),
           ],
@@ -29,7 +27,7 @@ class Home extends StatelessWidget {
 
   Widget popularDrinks(bloc) {
     return Column(children: <Widget>[
-      pageTitle('Popular Drinks', 'Really awesome list'),
+      contentTitle('Popular Drinks', 'Really awesome list', 18),
       Expanded(
         flex: 1,
         child: DrinksListHorizontal(stream: bloc.popular),
@@ -39,7 +37,8 @@ class Home extends StatelessWidget {
 
     Widget tequilaDrinks(bloc) {
     return Column(children: <Widget>[
-      pageTitle('Tequila', 'See some tequila drinks'),
+      contentTitle('Tequila', 'See some tequila drinks', 18),
+      IngredientsList(),
       Expanded(
         flex: 1,
         child: Container(
@@ -50,16 +49,16 @@ class Home extends StatelessWidget {
     ]);
   }
 
-  Widget pageTitle(String title, String subtitle) {
+  Widget contentTitle(String title, String subtitle, double titleSize) {
     return Container(
-      padding: EdgeInsets.all(_contentSpacing),
+      padding: EdgeInsets.only(top: (_contentSpacing / 2), bottom: (_contentSpacing / 2), left: _contentSpacing, right: _contentSpacing),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.w700),
           ),
           Text(
             subtitle,

@@ -4,7 +4,7 @@ import 'dart:convert';
 class DrinksApiProvider {
   Client client = Client();
   static String credentials = '1';
-  String baseURL = 'https://www.thecocktaildb.com/api/json/v1/$credentials';
+  String baseURL = 'https://www.thecocktaildb.com/api/json/v2/$credentials';
 
   Future<List<Map<String, dynamic>>> fetchPopularDrinks() async {
     final filter = 'popular.php';

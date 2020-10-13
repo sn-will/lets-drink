@@ -11,18 +11,18 @@ class _IngredientsListState extends State<IngredientsList> {
   final _tagRadius = 16.0;
   final _tagPadding = 15.0;
   final _tagSpacing = 10.0;
-  int selectedItemIndex;
+  int selectedItemIndex = 0;
 
-  selectIngredient(index) {
+  selectIngredient(index, bloc, ingrident) {
     setState(() {
       selectedItemIndex = index;
+      bloc.fetchDrinksByIngredient(ingrident.name);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final bloc = DrinksProvider.of(context);
-    bloc.fetchIngredients();
 
     return StreamBuilder(
       stream: bloc.ingredients,
@@ -37,7 +37,7 @@ class _IngredientsListState extends State<IngredientsList> {
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
               final ingredient = IngredientModel.fromJson(snapshot.data[index]);
-              return ingredientTag(ingredient, index);
+              return ingredientTag(ingredient, index, bloc);
             },
           ),
         );
@@ -45,12 +45,12 @@ class _IngredientsListState extends State<IngredientsList> {
     );
   }
 
-  Widget ingredientTag(IngredientModel ingredient, int index) {
+  Widget ingredientTag(IngredientModel ingredient, int index, bloc) {
     var isSelected = selectedItemIndex == index;
     var isFirst = index == 0;
 
     return GestureDetector(
-      onTap: () => selectIngredient(index),
+      onTap: () => selectIngredient(index, bloc, ingredient),
       child: Container(
         padding: EdgeInsets.only(left: _tagPadding, right: _tagPadding),
         margin: EdgeInsets.only(right: _tagSpacing, left: isFirst ? (_tagSpacing * 2) : 0.0),
@@ -63,7 +63,7 @@ class _IngredientsListState extends State<IngredientsList> {
           borderRadius: BorderRadius.all(
             Radius.circular(_tagRadius),
           ),
-          color: isSelected ? Colors.orangeAccent : Colors.grey[300],
+          color: isSelected ? Colors.pinkAccent : Colors.grey[300],
         ),
       ),
     );

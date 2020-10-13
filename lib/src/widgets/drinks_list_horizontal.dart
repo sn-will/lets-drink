@@ -5,7 +5,7 @@ import '../widgets/drink.dart';
 
 class DrinksListHorizontal extends StatelessWidget {
   final Stream stream;
-  final _bottomSpace = 10.0;
+  final _listSpacing = 10.0;
 
   DrinksListHorizontal({@required this.stream});
 
@@ -18,7 +18,7 @@ class DrinksListHorizontal extends StatelessWidget {
           return Text('Loading drinks...');
         }
         return ListView.builder(
-          padding: EdgeInsets.only(bottom: _bottomSpace),
+          padding: EdgeInsets.only(bottom: _listSpacing, top: _listSpacing),
           scrollDirection: Axis.horizontal,
           itemCount: snapshot.data.length,
           itemBuilder: (context, int index) {
