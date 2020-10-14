@@ -9,6 +9,8 @@ class Drink extends StatelessWidget {
   final double _boxRadius = 16.0;
   final double _shadowSize = 6.5;
   final double _drinkMargin = 20.0;
+  final double _titleSize = 15.0;
+  final double _textSpacing = 5.0;
 
   Drink({@required this.drink, this.index});
 
@@ -26,7 +28,9 @@ class Drink extends StatelessWidget {
       child: Container(
         width: 160,
         margin: EdgeInsets.only(
-            right: _drinkMargin, left: isFirst ? _drinkMargin : 0),
+          right: _drinkMargin,
+          left: isFirst ? _drinkMargin : 0,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(_boxRadius),
           color: Colors.white,
@@ -39,7 +43,10 @@ class Drink extends StatelessWidget {
           ],
         ),
         child: Column(
-          children: <Widget>[itemImage(), Expanded(child: itemInfo(), flex: 1)],
+          children: <Widget>[
+            itemImage(),
+            Expanded(child: itemInfo(), flex: 1),
+          ],
         ),
       ),
     );
@@ -66,14 +73,19 @@ class Drink extends StatelessWidget {
 
   Widget itemInfo() {
     Widget drinkName() {
-      return Text(
-        '${drink.name}',
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
-        style: TextStyle(
-          color: Colors.black87,
-          fontSize: 15.0,
-          fontWeight: FontWeight.w600,
+      return Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.only(bottom: _textSpacing),
+          child: Text(
+            '${drink.name}',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              fontSize: _titleSize,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ),
       );
     }
@@ -87,14 +99,17 @@ class Drink extends StatelessWidget {
       );
     }
 
-    return Container(
-      padding: EdgeInsets.all(_contentSpacing),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(child: drinkName(), flex: 1),
-          drinkBottom(),
-        ],
+    return Hero(
+      tag: '${drink.name}-content',
+      child: Container(
+        padding: EdgeInsets.all(_contentSpacing),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(child: drinkName(), flex: 1),
+            drinkBottom(),
+          ],
+        ),
       ),
     );
   }

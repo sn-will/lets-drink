@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'screens/home.dart';
 import 'screens/drink_detail.dart';
-// import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/rendering.dart';
 import 'blocs/drinks_bloc_provider.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // debugPaintSizeEnabled = true;
+    //debugPaintSizeEnabled = true;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.light
+    ));
 
     return DrinksProvider(
       child: MaterialApp(
