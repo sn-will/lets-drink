@@ -9,15 +9,27 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //debugPaintSizeEnabled = true;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarBrightness: Brightness.light),
+    );
 
     return DrinksProvider(
       child: MaterialApp(
         title: 'Lets Drink!',
         onGenerateRoute: routes,
-        theme: ThemeData(fontFamily: 'Noto Sans'),
+        theme: ThemeData(
+          primaryColor: Colors.pinkAccent,
+          accentColor: Colors.grey[850],
+          fontFamily: 'Montserrat',
+          textTheme: TextTheme(
+            bodyText2: TextStyle(
+              color: Colors.grey[850],
+            ),
+            bodyText1: TextStyle(
+              color: Colors.grey[400],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -29,7 +41,6 @@ class App extends StatelessWidget {
           final bloc = DrinksProvider.of(context);
           bloc.fetchPopularDrinks();
           bloc.fetchIngredients();
-          bloc.fetchDrinksByIngredient('Vodka');
 
           return Home();
         },

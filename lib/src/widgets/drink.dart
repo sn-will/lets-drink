@@ -4,12 +4,14 @@ import '../models/drink_model.dart';
 class Drink extends StatelessWidget {
   final DrinkModel drink;
   final int index;
+  final double _drinkWidth = 180.0;
   final double _contentSpacing = 12.0;
-  final double _imageHeight = 100;
+  final double _imageHeight = 120;
   final double _boxRadius = 16.0;
   final double _shadowSize = 6.5;
   final double _drinkMargin = 20.0;
   final double _titleSize = 15.0;
+  final double _tagsSize = 12.0;
   final double _textSpacing = 5.0;
 
   Drink({@required this.drink, this.index});
@@ -26,7 +28,7 @@ class Drink extends StatelessWidget {
       onTap: () =>
           Navigator.pushNamed(context, '/${drink.id}', arguments: drink),
       child: Container(
-        width: 160,
+        width: _drinkWidth,
         margin: EdgeInsets.only(
           right: _drinkMargin,
           left: isFirst ? _drinkMargin : 0,
@@ -45,7 +47,7 @@ class Drink extends StatelessWidget {
         child: Column(
           children: <Widget>[
             itemImage(),
-            Expanded(child: itemInfo(), flex: 1),
+            Expanded(child: itemInfo(context), flex: 1),
           ],
         ),
       ),
@@ -71,30 +73,47 @@ class Drink extends StatelessWidget {
     );
   }
 
-  Widget itemInfo() {
+  Widget itemInfo(context) {
+     Widget drinkTags() {
+      return Text(
+        '${drink.tags}',
+        style: TextStyle(
+          color: Colors.grey[600],
+          fontSize: _tagsSize,
+        ),
+      );
+    }
+
     Widget drinkName() {
       return Material(
         color: Colors.transparent,
         child: Container(
           padding: EdgeInsets.only(bottom: _textSpacing),
-          child: Text(
-            '${drink.name}',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: _titleSize,
-              fontWeight: FontWeight.w700,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${drink.name}',
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: _titleSize,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 5),
+              drinkTags(),
+            ],
           ),
         ),
       );
     }
 
-    Widget drinkBottom() {
+    Widget drinkBottom(context) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Icon(Icons.star_border, color: Colors.pinkAccent, size: 28.0),
+          Icon(Icons.star_border, color: Theme.of(context).primaryColor, size: 28.0),
         ],
       );
     }
@@ -107,7 +126,7 @@ class Drink extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(child: drinkName(), flex: 1),
-            drinkBottom(),
+            drinkBottom(context),
           ],
         ),
       ),

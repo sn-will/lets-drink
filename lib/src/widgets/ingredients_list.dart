@@ -11,7 +11,7 @@ class _IngredientsListState extends State<IngredientsList> {
   final _tagRadius = 16.0;
   final _tagPadding = 15.0;
   final _tagSpacing = 10.0;
-  int selectedItemIndex = 0;
+  int selectedItemIndex;
 
   selectIngredient(index, bloc, ingrident) {
     setState(() {
@@ -63,7 +63,7 @@ class _IngredientsListState extends State<IngredientsList> {
           borderRadius: BorderRadius.all(
             Radius.circular(_tagRadius),
           ),
-          color: isSelected ? Colors.pinkAccent : Colors.grey[300],
+          color: isSelected ? Theme.of(context).primaryColor : Colors.grey[300],
         ),
       ),
     );

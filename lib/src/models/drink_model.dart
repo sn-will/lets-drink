@@ -5,6 +5,7 @@ class DrinkModel {
   String alcoholic;
   String instructions;
   String image;
+  String tags;
 
   DrinkModel.fromJson(Map<String, dynamic> parsedJson) {
     id = parsedJson['idDrink'];
@@ -13,5 +14,6 @@ class DrinkModel {
     category = parsedJson['strCategory'] ?? '';
     alcoholic = parsedJson['strAlcoholic'] ?? '';
     instructions = parsedJson['strInstructions'] ?? '';
+    tags = parsedJson['strTags'] ?? '';
   }
 }

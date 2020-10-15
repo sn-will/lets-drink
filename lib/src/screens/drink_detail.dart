@@ -7,6 +7,7 @@ class DrinkDetail extends StatelessWidget {
   final _contentPadding = 15.0;
   final _textSpacing = 15.0;
   final _titleSize = 28.0;
+  final double _tagsSize = 14.0;
   final _descriptionSize = 16.0;
   final double _boxRadius = 20.0;
 
@@ -70,16 +71,35 @@ class DrinkDetail extends StatelessWidget {
   }
 
   Widget drinkName() {
+    Widget drinkTags() {
+      return Text(
+        '${drink.tags}',
+        style: TextStyle(
+          color: Colors.grey[600],
+          fontSize: _tagsSize,
+        ),
+      );
+    }
+
     return Material(
       color: Colors.transparent,
       child: Container(
         padding: EdgeInsets.only(bottom: _textSpacing),
-        child: Text(
-          '${drink.name}',
-          style: TextStyle(
-            fontSize: _titleSize,
-            fontWeight: FontWeight.w700,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${drink.name}',
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: _titleSize,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: drink.tags.length > 0 ? 5 : 0),
+            drink.tags.length > 0 ? drinkTags() : Container(),
+          ],
         ),
       ),
     );
@@ -93,7 +113,6 @@ class DrinkDetail extends StatelessWidget {
         style: TextStyle(
           fontSize: _descriptionSize,
           color: Colors.grey[600],
-          fontWeight: FontWeight.w300,
         ),
       ),
     );
